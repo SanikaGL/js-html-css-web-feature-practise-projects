@@ -16,7 +16,7 @@ Each feature is placed inside its own folder and contains:
 To practice how HTML, CSS, and JavaScript work together to create interactive web components.
 
 ## 🚀 How to Run These Projects
-1. Clone or download this repository to your computer:clone-link-->
+1. Clone or download this repository to your computer:clone-link--> https://github.com/SanikaGL/js-html-css-web-feature-practise-projects.git
 2. Open the repository on your system.
 3. Open any feature folder you want to try.
 4. Inside that folder, open `index.html` in any web browser (Chrome, Firefox, Edge, etc.).
