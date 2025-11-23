@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hamburger Menu — BASIC (HTML/CSS/JS)</title>
+  <!-- Link to external CSS file -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Simple top navbar: contains brand and the hamburger button -->
+  <header class="topbar" id="topbar">
+    <!-- Hamburger button: this is what user clicks to open/close the sidebar.
+         It uses a button element for accessibility so screen-readers can focus it.
+         The three spans draw the three lines visually. -->
+     <button id="hamburger" class="hamburger" aria-label="Open navigation" aria-expanded="false">
+      <span class="line"></span>
+      <span class="line"></span>
+      <span class="line"></span>
+    </button>
+    <!-- Brand / site title -->
+    <div class="brand">MySite</div>
+
+    <!-- Hamburger button: this is what user clicks to open/close the sidebar.
+         It uses a button element for accessibility so screen-readers can focus it.
+         The three spans draw the three lines visually. -->
+    
+  </header>
+
+  <!-- Off-canvas sidebar navigation.
+       role="navigation" explains this is a nav area (accessibility).
+       aria-hidden toggles in JS to tell assistive tech if it's visible. -->
+  <nav id="sidebar" class="sidebar" role="navigation" aria-hidden="true">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page content area -->
+  <main class="content">
+    <h1>Welcome</h1>
+    <p>This is a small demo of a hamburger menu that slides a sidebar in and out.</p>
+
+    <!-- Example long content so you can scroll and see offset behavior. -->
+    <section style="height:1200px;">
+      <h2 id="home">Home section</h2>
+      <p>Scroll to test offset behavior if we were linking to anchors.</p>
+    </section>
+  </main>
+
+  <!-- Link to external JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>

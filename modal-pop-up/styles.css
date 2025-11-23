@@ -1,0 +1,42 @@
+/* Style the page button */
+#openBtn {
+    padding: 10px 20px; /* Increase click area */
+    font-size: 16px;    /* Easy to read */
+    cursor: pointer;    /* Shows hand pointer */
+}
+
+/* The background dim layer (hidden by default) */
+#overlay {
+    position: fixed;        /* Fixed == always stays in same place even if you scroll */
+    top: 0;
+    left: 0;
+    width: 100%;            /* Cover the full screen width */
+    height: 100%;           /* Cover the full screen height */
+    background: rgba(0,0,0,0.5); /* 50% transparent black */
+    display: none;          /* Hidden until modal opens */
+    /* CSS-only alternative: if you want the modal ALWAYS visible,
+       remove "display: none;" and modal will show immediately */
+}
+
+/* The modal box */
+#modal {
+    position: fixed;           /* Stay in center of screen */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    /* translate(-50%, -50%) means move 50% left and 50% up
+       so modal becomes perfectly centered */
+
+    width: 300px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;       /* Smooth corners */
+    display: none;            /* Hidden until JS shows it */
+
+    /* CSS-only alternative: force modal visible by removing display: none; */
+}
+
+/* BEST PRACTICE (CSS END):
+   Keep modal hidden using CSS (display:none) and show it with JS.
+   This gives full control and avoids layout issues.
+*/

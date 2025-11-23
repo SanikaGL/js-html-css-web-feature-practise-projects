@@ -1,0 +1,66 @@
+..
+CS--->>
+..
+
+ARIA attributes — aria-label, aria-expanded, aria-hidden (plain, concrete)
+aria-label="Open navigation"
+
+Tells screen readers what the button does. If the button only has an icon, screen readers need text to speak.
+
+Plain: “If a blind person uses a screen reader, it will say ‘Open navigation’.”
+
+aria-expanded="false" / "true"
+
+Shows whether a control that expands/collapses something is currently expanded.
+
+When the menu is closed: aria-expanded="false". When open: aria-expanded="true".
+
+Screen readers announce the state, so users know whether the menu is open.
+
+aria-hidden="true" / "false"
+
+Put on the sidebar element to tell assistive tech whether it’s visible.
+
+When menu is hidden: aria-hidden="true" (screen readers ignore the menu items).
+
+When shown: aria-hidden="false" (screen readers can read the menu items).
+
+This is important so keyboard/screen-reader users don’t accidentally navigate to hidden item
+..
+..
+..
+..
+..
+JS----->>>>
+..
+..
+..
+Extra JS behaviors often included and why
+Close when clicking outside the menu
+document.addEventListener('click', function (event) {
+  if (!sidebar.classList.contains('open')) return;           // if menu is closed, do nothing
+  if (sidebar.contains(event.target) || hamburger.contains(event.target)) return; // if click inside menu/hamburger, do nothing
+
+  // click was outside → close
+  sidebar.classList.remove('open');
+  sidebar.setAttribute('aria-hidden', 'true');
+  hamburger.setAttribute('aria-expanded', 'false');
+  bodyEl.classList.remove('sidebar-open');
+});
+
+
+Why: feels natural — user clicks elsewhere to dismiss the menu.
+
+Close on Escape key
+document.addEventListener('keydown', function (event) {
+  if ((event.key === 'Escape' || event.key === 'Esc' || event.keyCode === 27) && sidebar.classList.contains('open')) {
+    // close the sidebar
+    sidebar.classList.remove('open');
+    sidebar.setAttribute('aria-hidden', 'true');
+    hamburger.setAttribute('aria-expanded', 'false');
+    bodyEl.classList.remove('sidebar-open');
+  }
+});
+
+
+Why: accessibility / keyboard users expect Escape to close modals/menus.

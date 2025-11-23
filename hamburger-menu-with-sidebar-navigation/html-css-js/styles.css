@@ -1,0 +1,140 @@
+/* styles.css - BASIC hamburger menu styling
+   Every rule includes a short explanation for beginners.
+*/
+
+/* Reset some defaults for body so layout is predictable */
+* {
+  box-sizing: border-box; /* Make width/padding behave more intuitively */
+}
+
+body {
+  margin: 0;                 /* Remove default browser margin */
+  font-family: sans-serif;   /* Simple readable font */
+   display: flex;          /* Use flex so sidebar and content sit side-by-side when sidebar is visible */
+  min-height: 100vh;         /* Ensure page fills the full viewport height */
+}
+
+/* TOPBAR (the bar at the top containing brand and hamburger) */
+.topbar {
+  position: fixed;           /* Keep topbar fixed at top of the viewport */
+  top: 0;                    /* Position at very top */
+  left: 0;
+  right: 0;
+  height: 64px;              /* NAVBAR HEIGHT — we will refer to this as offset if linking to sections */
+  display: flex;             /* Arrange brand and button horizontally */
+  align-items: center;       /* Vertically center items */
+  justify-content: space-between; /* Brand left, button right */
+  padding: 0 16px;           /* Spacing inside the topbar */
+  background: #0b5cff;       /* blue background for visibility */
+  color: white;
+  z-index: 1000;             /* Place above the sidebar and content */
+}
+
+/* Example of explaining "offset" inline:
+   offset = topbar height ≈ 64px
+   This means if you link to an anchor (like #home), you may want to scroll an extra 64px
+   so the section title is not hidden under the fixed topbar.
+*/
+
+/* Brand text styling */
+.brand {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* HAMBURGER BUTTON */
+.hamburger {
+  background: transparent;   /* No default button background */
+  border: none;              /* Remove default border */
+  padding: 8px;
+  cursor: pointer;           /* Show click pointer */
+  display: inline-flex;
+  flex-direction: column;    /* Stack the three lines vertically */
+  gap: 4px;                  /* Space between lines */
+  align-items: center;
+}
+
+/* Visual lines inside the hamburger button */
+.hamburger .line {
+  display: block;
+  width: 26px;
+  height: 3px;
+  background: white;         /* White lines on blue topbar */
+  border-radius: 2px;
+}
+
+/* SIDEBAR (off-canvas) */
+.sidebar {
+  position: fixed;           /* Fixed so it doesn't scroll with page */
+  top: 64px;                 /* Start just under the topbar (topbar height) */
+  left: 0;                   /* We'll slide it horizontally from left */
+  width: 260px;              /* Sidebar width */
+  height: calc(100vh - 64px);/* Fill remaining viewport height under the topbar */
+  background: #f7f7f7;
+  padding: 16px;
+  transform: translateX(-100%); /* Initially hide it by moving it fully left (-100%) */
+  transition: transform 280ms ease; /* Smooth slide animation for transform changes */
+  box-shadow: 2px 0 8px rgba(0,0,0,0.08);
+  z-index: 900;              /* Under the topbar but above content */
+  overflow-y: auto;         /* Allow scrolling inside the sidebar if content is long */
+}
+
+/* When the sidebar has the class "open" we slide it to 0 (visible) */
+.sidebar.open {
+  transform: translateX(0);  /* Slide in */
+}
+
+/* Link styles inside sidebar */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li + li {
+  margin-top: 12px;
+}
+
+.sidebar a {
+  color: #222;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* PAGE CONTENT */
+.content {
+  margin-top: 64px;          /* Push content below the fixed topbar */
+  flex: 1;                   /* Fill remaining horizontal space (content area) */
+  padding: 20px;
+  transition: margin-left 280ms ease; /* Smooth shift when sidebar opens (optional) */
+  min-height: calc(100vh - 64px);
+}
+
+/* OPTIONAL: shift content right when sidebar open to show space.
+   This is not strictly necessary for the sidebar to work, but improves visual effect.
+   We'll toggle class "sidebar-open" on body in JS to control this. */
+body.sidebar-open .content {
+  margin-left: 260px;        /* same as sidebar width */
+}
+
+/* Small screens responsive behavior example */
+@media (max-width: 600px) {
+  .sidebar { width: 220px; } /* slightly smaller on small screens */
+  body.sidebar-open .content { margin-left: 220px; }
+}
+
+/* CSS-only alternative:
+   If you want CSS-only behavior (no JavaScript), you could:
+   1. Add an input checkbox (hidden) and use :checked to toggle .sidebar { transform: translateX(0); }
+   2. Or use the :target pseudo-class on an anchor that points to the sidebar.
+   Example (not added to HTML): 
+   /* CSS-only example (concept):
+   #menu-toggle:checked ~ .sidebar { transform: translateX(0); }
+   */
+   /* To use CSS-only: enable the checkbox method above in HTML and enable the rule,
+      then remove the JS that toggles classes in script.js. */
+
+
+/* BEST PRACTICE: Prefer transform and hardware-accelerated properties (transform) for animations
+   because they are smoother and less likely to cause layout reflow. Avoid animating width/left when possible.
+*/
